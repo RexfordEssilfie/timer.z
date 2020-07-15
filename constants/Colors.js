@@ -1,0 +1,11 @@
+
+const Colors = {
+    white: "#FBFBFB",
+    green: "#4CCD70",
+    black: "#000000",
+    orange: "#D38B48",
+    pink: "#CD5C4C",
+    lightblue: "#EDEFF0",
+}
+
+export default Colors;
