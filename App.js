@@ -17,6 +17,12 @@ const App = () => {
 
   const [timers, setTimers] = React.useState(DEFAULT_TIMERS);
 
+  function addTimer(timer) {
+    setTimers(timers => { return { ...timers, timer } })
+    console.log(timers)
+  }
+
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -26,7 +32,8 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
 
-          <Home timers={timers} />
+          {/*<Home timers={timers} />*/}
+          <AddTimer handleSubmit={addTimer} />
 
         </ScrollView>
       </SafeAreaView>

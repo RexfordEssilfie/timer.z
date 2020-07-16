@@ -8,28 +8,26 @@ import { Colors } from '../constants'
 
 export default function AddTimer({ handleSubmit }) {
 
-    const [chosenDuration, setChosenDuration] = React.useState(null)
+    const [chosenDuration, setChosenDuration] = React.useState(new Date(0, 0, 0, 0, 0, 0, 0))
     const [timerName, setTimerName] = React.useState("");
     const textRef = useRef(null)
 
-
-    function FieldItem(props) {
-        return (
-            <View style={styles.field}>
-                {props.children}
-            </View>
-        )
-    }
-
     function submitTimer() {
+
+        console.log(chosenDuration.toDateString())
+        const hours = chosenDuration.getHours()
+        const minutes = chosenDuration.getMinutes()
+        const seconds = chosenDuration.getSeconds()
+
+        const timeInSeconds = (hours * 3600) + (minutes * 60) + seconds
 
         const timer = {
             name: timerName,
-            totalDuration: chosenDuration,
-            timeLeft: chosenDuration,
+            totalDuration: timeInSeconds,
             started: true
         }
 
+        console.log(timer)
         handleSubmit(timer);
     }
 
@@ -57,7 +55,7 @@ export default function AddTimer({ handleSubmit }) {
 
                 <View style={styles.field}>
                     <Text style={styles.label}>Duration</Text>
-                    <DateTimePicker value={chosenDuration || new Date()} mode="countdown" onChange={(event, date) => setChosenDuration(date)} />
+                    <DateTimePicker value={chosenDuration || new Date()} mode="countdown" onChange={(event, date) => setChosenDuration(new Date(date))} />
                 </View>
 
                 <View style={styles.actionButtons}>
