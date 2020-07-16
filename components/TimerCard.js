@@ -1,11 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 import play from "../assets/play.png"
+import pause from "../assets/pause.png"
 
 
-export default function TimerCard({ name, totalDuration, timeLeft, started, handleStartTimer }) {
+export default function TimerCard({ name, totalDuration }) {
+
+    const [timeLeft, setTimeLeft] = useState(totalDuration)
+    const [timerIsStarted, setTimerIsStarted] = useState(false)
+
+
+
+    useEffect(() => {
+        let intervalId = null
+        if (timerIsStarted) {
+            intervalId = setInterval(() => {
+                setTimeLeft(timeLeft => timeLeft - 1)
+            }, 1000)
+        }
+        return cleanup = () => {
+            clearInterval(intervalId)
+        }
+    }, [timerIsStarted])
+
+    function startTimer() {
+        setTimerIsStarted(true)
+    }
+
+    function stopTimer() {
+        setTimerIsStarted(false)
+    }
 
     function parseTime(timeInSeconds) {
         const hours = Math.floor(timeInSeconds / 3600)
@@ -13,7 +39,6 @@ export default function TimerCard({ name, totalDuration, timeLeft, started, hand
         const seconds = Math.floor(timeInSeconds - (hours * 3600) - (minutes * 60))
 
         function prefixZero(num) {
-            console.log(num);
             if (num < 10) return `0${num}`
             return `${num}`
         }
@@ -27,8 +52,12 @@ export default function TimerCard({ name, totalDuration, timeLeft, started, hand
 
         return (
             <View style={styles.timerAndButton}>
-                <Pressable>
-                    <Image style={styles.playPauseButton} source={play} />
+                <Pressable onPress={() => { timerIsStarted ? stopTimer(name) : startTimer(name) }}>
+                    {
+                        timerIsStarted ? <Image style={styles.playPauseButton} source={pause} />
+                            : <Image style={styles.playPauseButton} source={play} />
+                    }
+
                 </Pressable>
                 <Text style={styles.timer}>{parseTime(timeToDisplay)}</Text>
             </View>
