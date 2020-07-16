@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -10,6 +10,7 @@ export default function AddTimer({ handleSubmit }) {
 
     const [chosenDuration, setChosenDuration] = React.useState(null)
     const [timerName, setTimerName] = React.useState("");
+    const textRef = useRef(null)
 
 
     function FieldItem(props) {
@@ -32,6 +33,11 @@ export default function AddTimer({ handleSubmit }) {
         handleSubmit(timer);
     }
 
+    function handleChange(text) {
+        setTimerName(text);
+        textRef.current.focus()
+    }
+
 
     return (
         <View>
@@ -39,15 +45,20 @@ export default function AddTimer({ handleSubmit }) {
 
             <View style={styles.form}>
 
-                <FieldItem>
+                <View style={styles.field}>
                     <Text style={styles.label}>Name</Text>
-                    <TextInput style={styles.timerName} placeholder="My Special Timer" />
-                </FieldItem>
+                    <TextInput ref={textRef}
+                        style={styles.timerName}
+                        placeholder="My Special Timer"
+                        value={timerName}
+                        onChangeText={handleChange} />
+                </View>
 
-                <FieldItem>
+
+                <View style={styles.field}>
                     <Text style={styles.label}>Duration</Text>
                     <DateTimePicker value={chosenDuration || new Date()} mode="countdown" onChange={(event, date) => setChosenDuration(date)} />
-                </FieldItem>
+                </View>
 
                 <View style={styles.actionButtons}>
                     <Pressable onPress={() => submitTimer()}>
