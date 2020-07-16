@@ -1,22 +1,19 @@
 export const DEFAULT_TIMERS = {
     "laundry": {
         name: "Laundry",
-        totalDuration: 19600,
-        timeLeft: 18000,
+        totalDuration: 3600,
         started: false
     },
 
     "food": {
         name: "Food",
-        totalDuration: 19600,
-        timeLeft: 18000,
+        totalDuration: 2700,
         started: false
     },
 
     "pomodoro": {
         name: "Pomodoro",
-        totalDuration: 19600,
-        timeLeft: 60,
-        started: true
+        totalDuration: 1500,
+        started: false
     }
 }
