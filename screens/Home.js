@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 
 import { Colors } from "../constants"
 
@@ -10,8 +10,13 @@ export default function Home({ timers }) {
 
     function renderTimers() {
         return Object.keys(timers).map(key => {
-            const { name, totalDuration, timeLeft } = timers[key];
-            return <TimerCard key={name} name={name} totalDuration={totalDuration} timeLeft={timeLeft} />
+            const { name, totalDuration, started } = timers[key];
+            return <TimerCard
+                key={name}
+                name={name}
+                started={started}
+                totalDuration={totalDuration}
+            />
         })
     }
     return (
