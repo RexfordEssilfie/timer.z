@@ -21,7 +21,7 @@ const App = () => {
   const [timers, setTimers] = React.useState(DEFAULT_TIMERS);
 
   function addTimer(timer) {
-    setTimers(timers => { return { ...timers, timer } })
+    setTimers(timers => { return { [timer.name]: timer, ...timers } })
     console.log(timers)
   }
 
