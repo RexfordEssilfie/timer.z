@@ -67,7 +67,7 @@ export default function TimerCard({ name, totalDuration }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.name}>{name || "Laundry"}</Text>
+            <Text style={styles.name}>{name || "Timer"}</Text>
             {renderTimerWithButton()}
         </View>
     )
