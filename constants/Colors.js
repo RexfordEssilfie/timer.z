@@ -6,6 +6,7 @@ const Colors = {
     orange: "#D38B48",
     pink: "#CD5C4C",
     lightblue: "#EDEFF0",
+    grey: "#8F8F8F"
 }
 
 export default Colors;
