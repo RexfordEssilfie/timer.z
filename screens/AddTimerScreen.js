@@ -24,17 +24,24 @@ export default function AddTimer({ handleSubmit, navigation }) {
         const timer = {
             name: timerName,
             totalDuration: timeInSeconds,
-            started: true
+            started: true,
+            lastUpdate: Date.now()
         }
 
         console.log(timer)
         handleSubmit(timer);
+        resetForm()
 
         navigation.navigate('Home')
     }
 
     function handleChange(text) {
         setTimerName(text);
+    }
+
+    function resetForm() {
+        setTimerName("")
+        setChosenDuration(new Date(0, 0, 0, 0, 0, 0, 0))
     }
 
 
