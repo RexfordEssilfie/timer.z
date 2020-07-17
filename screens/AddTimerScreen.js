@@ -11,7 +11,6 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
     const [chosenDuration, setChosenDuration] = React.useState(new Date(0, 0, 0, 0, 0, 0, 0))
     const [timerName, setTimerName] = React.useState("");
-    const textRef = useRef(null)
 
     function submitTimer() {
 
@@ -36,7 +35,6 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
     function handleChange(text) {
         setTimerName(text);
-        textRef.current.focus()
     }
 
 
@@ -48,7 +46,7 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
                 <View style={styles.field}>
                     <Text style={styles.label}>Name</Text>
-                    <TextInput ref={textRef}
+                    <TextInput
                         style={styles.timerName}
                         placeholder="My Special Timer"
                         value={timerName}
