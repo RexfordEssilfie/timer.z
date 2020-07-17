@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import PageTitle from "../components/PageTitle"
 import { Colors } from '../constants'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function AddTimer({ handleSubmit, navigation }) {
 
@@ -29,6 +30,8 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
         console.log(timer)
         handleSubmit(timer);
+
+        navigation.navigate('Home')
     }
 
     function handleChange(text) {
@@ -38,7 +41,7 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
 
     return (
-        <View>
+        <SafeAreaView style={{ marginTop: 30 }}>
             <PageTitle text="Add Timer" />
 
             <View style={styles.container}>
@@ -71,7 +74,7 @@ export default function AddTimer({ handleSubmit, navigation }) {
 
 
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

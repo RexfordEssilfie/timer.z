@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions, SafeAreaView } from 'react-native'
 
 import { Colors } from "../constants"
 
@@ -20,10 +20,13 @@ export default function Home({ timers }) {
         })
     }
     return (
-        <ScrollView style={styles.container}>
-            <PageTitle text="Timer.z" underlineLength={70} />
-            {renderTimers()}
-        </ScrollView>
+        <SafeAreaView style={{ marginTop: 30 }}>
+            <ScrollView style={styles.container}>
+                <PageTitle text="Timer.z" underlineLength={70} />
+                {renderTimers()}
+            </ScrollView>
+        </SafeAreaView>
+
     )
 }
 
