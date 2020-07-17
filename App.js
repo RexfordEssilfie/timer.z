@@ -7,8 +7,12 @@ import {
   Dimensions
 } from 'react-native';
 
-import Home from "./screens/Home"
-import AddTimer from "./screens/AddTimer"
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack'
+
+import HomeScreen from "./screens/HomeScreen"
+import AddTimerScreen from "./screens/AddTimerScreen"
 
 import { Colors } from "./constants"
 import { DEFAULT_TIMERS } from './utils';
@@ -22,21 +26,22 @@ const App = () => {
     console.log(timers)
   }
 
+  const Stack = createStackNavigator()
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Add Timer">
+          <Stack.Screen name="Home">
+            {props => <HomeScreen {...props} timers={timers} />}
+          </Stack.Screen>
 
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-
-          {/*<Home timers={timers} />*/}
-          <AddTimer handleSubmit={addTimer} />
-
-        </ScrollView>
-      </SafeAreaView>
+          <Stack.Screen name="Add Timer">
+            {props => <AddTimerScreen {...props} handleSubmit={addTimer} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
     </>
   );
 };
