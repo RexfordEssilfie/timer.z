@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
-import { View, Text, TextInput, StyleSheet, Pressable } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Pressable, Dimensions } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 import PageTitle from "../components/PageTitle"
 import { Colors } from '../constants'
 
-export default function AddTimer({ handleSubmit }) {
+export default function AddTimer({ handleSubmit, navigation }) {
 
     const [chosenDuration, setChosenDuration] = React.useState(new Date(0, 0, 0, 0, 0, 0, 0))
     const [timerName, setTimerName] = React.useState("");
@@ -41,7 +41,7 @@ export default function AddTimer({ handleSubmit }) {
         <View>
             <PageTitle text="Add Timer" />
 
-            <View style={styles.form}>
+            <View style={styles.container}>
 
                 <View style={styles.field}>
                     <Text style={styles.label}>Name</Text>
@@ -59,7 +59,9 @@ export default function AddTimer({ handleSubmit }) {
                 </View>
 
                 <View style={styles.actionButtons}>
-                    <Pressable onPress={() => submitTimer()}>
+                    <Pressable onPress={() => {
+                        submitTimer()
+                    }}>
                         <View style={[styles.buttonContainer, styles.startButton]}>
                             <Text style={styles.button}>Start</Text>
                         </View>
@@ -75,8 +77,12 @@ export default function AddTimer({ handleSubmit }) {
 
 const styles = StyleSheet.create({
 
-    form: {
-        paddingLeft: 10
+    container: {
+        paddingLeft: 20,
+        paddingLeft: 20,
+        paddingRight: 10,
+        minHeight: Dimensions.get('screen').height,
+        backgroundColor: Colors.lightblue,
     },
 
     field: {

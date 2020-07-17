@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, Dimensions } from 'react-native'
 
 import { Colors } from "../constants"
 
@@ -29,9 +29,13 @@ export default function Home({ timers }) {
 
 
 export const styles = StyleSheet.create({
-
     container: {
+        backgroundColor: Colors.lightblue,
+        paddingTop: 30,
+        display: "flex",
         flexGrow: 1,
-        backgroundColor: Colors.lightblue
+        paddingLeft: 10,
+        paddingRight: 10,
+        minHeight: Dimensions.get('screen').height
     }
 })
