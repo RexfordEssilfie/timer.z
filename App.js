@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-  SafeAreaView,
+  Text,
   StyleSheet,
-  ScrollView,
   StatusBar,
   Dimensions
 } from 'react-native';
 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import HomeScreen from "./screens/HomeScreen"
 import AddTimerScreen from "./screens/AddTimerScreen"
@@ -26,21 +25,33 @@ const App = () => {
     console.log(timers)
   }
 
-  const Stack = createStackNavigator()
+  const Tab = createBottomTabNavigator()
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Add Timer">
-          <Stack.Screen name="Home">
+        <Tab.Navigator initialRouteName="Home"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              return <Text style={{ color: color, fontSize: 17, fontWeight: "500" }}>{route.name}</Text>;
+            },
+          })}
+          tabBarOptions={{
+            showLabel: false,
+            tabStyle: { display: "flex", justifyContent: "center", backgroundColor: Colors.white, height: 70 },
+            activeTintColor: Colors.pink,
+            inactiveTintColor: Colors.grey,
+          }}
+        >
+          <Tab.Screen name="Home">
             {props => <HomeScreen {...props} timers={timers} />}
-          </Stack.Screen>
+          </Tab.Screen>
 
-          <Stack.Screen name="Add Timer">
+          <Tab.Screen name="Add Timer">
             {props => <AddTimerScreen {...props} handleSubmit={addTimer} />}
-          </Stack.Screen>
-        </Stack.Navigator>
+          </Tab.Screen>
+        </Tab.Navigator>
       </NavigationContainer>
     </>
   );
@@ -48,7 +59,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lightblue,
+    backgroundColor: Colors.white,
     paddingTop: 30,
     display: "flex",
     flexGrow: 1,
